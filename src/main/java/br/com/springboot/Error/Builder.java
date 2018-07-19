@@ -1,6 +1,6 @@
 package br.com.springboot.Error;
 
-public class ResourceNotFoundDetails {
+public class Builder {
 
 
     private String title;
@@ -13,7 +13,7 @@ public class ResourceNotFoundDetails {
 
     private String developermessage;
 
-    private ResourceNotFoundDetails() {
+    private Builder() {
     }
 
     public String getTitle() {
@@ -75,8 +75,8 @@ public class ResourceNotFoundDetails {
             return this;
         }
 
-        public ResourceNotFoundDetails build() {
-            ResourceNotFoundDetails resourceNotFoundDetails = new ResourceNotFoundDetails();
+        public Builder build() {
+            Builder resourceNotFoundDetails = new Builder();
             resourceNotFoundDetails.title = this.title;
             resourceNotFoundDetails.detail = this.detail;
             resourceNotFoundDetails.developermessage = this.developermessage;
