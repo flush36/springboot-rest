@@ -16,7 +16,7 @@ public class HandleException {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handlerResourceNotFoundException(ResourceNotFoundException ex) {
 
-                 Builder detailBuilder =
+                 Builder builderDetail =
                  Builder.ResourceNotFoundDetailsBuilder
                 .newBuilder()
                 .timestamp(new Date().getTime())
@@ -26,6 +26,6 @@ public class HandleException {
                 .developermessage(ex.getClass().getName())
                 .build();
 
-                 return new ResponseEntity<>(detailBuilder, HttpStatus.NOT_FOUND);
+                 return new ResponseEntity<>(builderDetail, HttpStatus.NOT_FOUND);
     }
 }
