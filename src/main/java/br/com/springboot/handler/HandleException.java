@@ -1,6 +1,6 @@
 package br.com.springboot.handler;
 
-import br.com.springboot.Error.Builder;
+import br.com.springboot.Error.ResourceNotFoundDetails;
 import br.com.springboot.Error.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +15,16 @@ public class HandleException {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handlerResourceNotFoundException(ResourceNotFoundException ex) {
+    	
+                 ResourceNotFoundDetails build = ResourceNotFoundDetails.Builder
+                 .newBuilder()
+                 .timestamp(new Date().getTime())
+                 .status(HttpStatus.NOT_FOUND.value())
+                 .title("Resource not found")
+                 .detail(ex.getMessage())
+                 .developerMessage(ex.getClass().getName())
+                 .build();
 
-                 Builder builderDetail =
-                 Builder.ResourceNotFoundDetailsBuilder
-                .newBuilder()
-                .timestamp(new Date().getTime())
-                .status(HttpStatus.NOT_FOUND.value())
-                .title("Resource not found")
-                .detail((ex.getMessage()))
-                .developermessage(ex.getClass().getName())
-                .build();
-
-                 return new ResponseEntity<>(builderDetail, HttpStatus.NOT_FOUND);
+                 return new ResponseEntity<>(build, HttpStatus.NOT_FOUND);
     }
 }
